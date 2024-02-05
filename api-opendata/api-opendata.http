@@ -1,0 +1,6 @@
+@api_opendata_HostAddress = http://localhost:5290
+
+GET {{api_opendata_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
