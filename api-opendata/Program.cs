@@ -117,7 +117,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "WRQuangNgai API");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "OpenData API");
     });
 }
 

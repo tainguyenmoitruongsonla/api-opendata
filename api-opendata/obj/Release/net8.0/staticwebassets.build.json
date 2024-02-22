@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "xoypmVwTA1glJ6nlKS4P62gQsXDs8ls7k1EB5BMP4SM=",
+  "Source": "api-opendata",
+  "BasePath": "_content/api-opendata",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
