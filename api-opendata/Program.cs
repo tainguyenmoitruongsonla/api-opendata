@@ -6,6 +6,8 @@ using api_opendata.Data;
 using System.Text;
 using System.Text.Json.Serialization;
 using api_opendata.Service;
+using Microsoft.EntityFrameworkCore;
+using new_wr_api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -135,5 +137,23 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Seed the database
+using (var scope = app.Services.CreateScope())
+{
+    try
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AspNetUsers>>();
+        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<AspNetRoles>>();
+
+        await dbContext.Database.MigrateAsync();
+        await SeedData.InitializeAsync(dbContext, userManager, roleManager);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error during database seeding: {ex.Message}");
+    }
+}
 
 app.Run();
