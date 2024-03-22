@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+﻿using api_opendata.Data;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using api_opendata.Data;
-using api_opendata.Dto;
 using System.Security.Claims;
+using api_opendata.Dto;
 
 namespace api_opendata.Service
 {
@@ -45,7 +45,7 @@ namespace api_opendata.Service
                 var rdash = await _context!.RoleDashboards!
                     .FirstOrDefaultAsync(x => x.RoleName == roleName && x.DashboardId == dashboard.Id);
 
-                var dto = new RoleDashboardDto
+                var model = new RoleDashboardDto
                 {
                     DashboardId = dashboard.Id,
                     DashboardName = dashboard.Name,
@@ -55,19 +55,19 @@ namespace api_opendata.Service
 
                 if (rdash != null)
                 {
-                    dto.Id = rdash.Id;
-                    dto.RoleId = rdash.RoleId;
-                    dto.RoleName = rdash.RoleName;
-                    dto.PermitAccess = (bool)rdash.PermitAccess!;
+                    model.Id = rdash.Id;
+                    model.RoleId = rdash.RoleId;
+                    model.RoleName = rdash.RoleName;
+                    model.PermitAccess = (bool)rdash.PermitAccess!;
                 }
                 else
                 {
-                    dto.RoleId = role?.Id;
-                    dto.RoleName = role?.Name;
-                    dto.PermitAccess = false;
+                    model.RoleId = role?.Id;
+                    model.RoleName = role?.Name;
+                    model.PermitAccess = false;
                 }
 
-                roleDashboards.Add(dto);
+                roleDashboards.Add(model);
             }
 
             return _mapper.Map<List<RoleDashboardDto>>(roleDashboards);
@@ -85,7 +85,7 @@ namespace api_opendata.Service
                 var udash = await _context!.UserDashboards!
                     .FirstOrDefaultAsync(x => x.UserName == userName && x.DashboardId == dashboard.Id);
 
-                var dto = new UserDashboardDto
+                var model = new UserDashboardDto
                 {
                     DashboardId = dashboard.Id,
                     DashboardName = dashboard.Name,
@@ -95,25 +95,25 @@ namespace api_opendata.Service
 
                 if (udash != null)
                 {
-                    dto.Id = udash.Id;
-                    dto.UserId = udash.UserId;
-                    dto.UserName = udash.UserName;
-                    dto.PermitAccess = (bool)udash.PermitAccess!;
+                    model.Id = udash.Id;
+                    model.UserId = udash.UserId;
+                    model.UserName = udash.UserName;
+                    model.PermitAccess = (bool)udash.PermitAccess!;
                 }
                 else
                 {
-                    dto.UserId = user?.Id;
-                    dto.UserName = user?.UserName;
-                    dto.PermitAccess = false;
+                    model.UserId = user?.Id;
+                    model.UserName = user?.UserName;
+                    model.PermitAccess = false;
                 }
 
-                userDashboards.Add(dto);
+                userDashboards.Add(model);
             }
 
             return _mapper.Map<List<UserDashboardDto>>(userDashboards);
         }
 
-        public async Task<DashboardDto> GetDashboardByIdAsync(int Id)
+        public async Task<DashboardDto?> GetDashboardByIdAsync(int Id)
         {
             var item = await _context!.Dashboards!.FindAsync(Id);
             var dash = _mapper.Map<DashboardDto>(item);
@@ -124,13 +124,13 @@ namespace api_opendata.Service
         }
 
 
-        public async Task<bool> SaveDashboardAsync(DashboardDto dto)
+        public async Task<bool> SaveDashboardAsync(DashboardDto model)
         {
-            var existingItem = await _context.Dashboards!.FirstOrDefaultAsync(d => d.Id == dto.Id);
+            var existingItem = await _context.Dashboards!.FirstOrDefaultAsync(d => d.Id == model.Id);
 
-            if (existingItem == null || dto.Id == 0)
+            if (existingItem == null || model.Id == 0)
             {
-                var newItem = _mapper.Map<Dashboards>(dto);
+                var newItem = _mapper.Map<Dashboards>(model);
                 newItem.IsDeleted = false;
                 newItem.CreatedTime = DateTime.Now;
                 newItem.CreatedUser = _httpContext.HttpContext?.User.FindFirstValue(ClaimTypes.Name) ?? null;
@@ -138,9 +138,9 @@ namespace api_opendata.Service
             }
             else
             {
-                var updateItem = await _context.Dashboards!.FirstOrDefaultAsync(d => d.Id == dto.Id);
+                var updateItem = await _context.Dashboards!.FirstOrDefaultAsync(d => d.Id == model.Id);
 
-                updateItem = _mapper.Map(dto, updateItem);
+                updateItem = _mapper.Map(model, updateItem);
 
                 updateItem!.ModifiedTime = DateTime.Now;
                 updateItem.ModifiedUser = _httpContext.HttpContext?.User.FindFirstValue(ClaimTypes.Name) ?? null;

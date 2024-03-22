@@ -7,7 +7,6 @@ using System.Text;
 using System.Text.Json.Serialization;
 using api_opendata.Service;
 using Microsoft.EntityFrameworkCore;
-using new_wr_api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -54,7 +53,7 @@ services.AddControllers();
 
 services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "WRQuangNgai API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Opendata SonLa API", Version = "v1" });
     var securityScheme = new OpenApiSecurityScheme
     {
         Name = "Authorization",

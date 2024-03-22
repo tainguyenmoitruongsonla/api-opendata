@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace new_wr_api.Data
+namespace api_opendata.Data
 {
     public static class SeedData
     {
