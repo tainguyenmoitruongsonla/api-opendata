@@ -1,9 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using api_opendata.Data;
-using System.Collections.Generic;
-
-namespace api_opendata.Dto
+﻿namespace api_opendata.Dto
 {
     public class DashboardDto
     {

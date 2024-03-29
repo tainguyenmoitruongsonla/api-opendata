@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using api_opendata.Dto;
-using api_opendata.Dto.Authenticate;
 
 namespace api_opendata.Service
 {
@@ -11,8 +10,8 @@ namespace api_opendata.Service
         public Task<bool> LogoutAsync(HttpContext context);
         public Task<bool> AssignRoleAsync(AssignRoleDto dto);
         public Task<bool> RemoveRoleAsync(AssignRoleDto dto);
-        public Task<bool> UpdatePasswordAsync(string currentPassword, string newPassword, string newConfirmPassword);
+        public Task<PasswordChangeResult> UpdatePasswordAsync(PasswordChange password);
         public Task<bool> SetPasswordAsync(UserDto dto, string newPassword);
-
+        public Task<bool> CheckAccessPermission(string userName, string linkControl, string action);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace api_opendata.Dto.Authenticate
+﻿namespace api_opendata.Dto
 {
     public class LoginViewDto
     {

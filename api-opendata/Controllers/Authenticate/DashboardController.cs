@@ -1,14 +1,14 @@
-﻿using api_opendata.Data;
-using api_opendata.Service;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using api_opendata.Data;
 using api_opendata.Dto;
+using api_opendata.Service;
 
 namespace api_opendata.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class DashboardController : ControllerBase
     {
         private readonly DashboardService _service;
@@ -42,7 +42,7 @@ namespace api_opendata.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        public async Task<DashboardDto?> GetDashboardById(int Id)
+        public async Task<DashboardDto> GetDashboardById(int Id)
         {
             return await _service.GetDashboardByIdAsync(Id);
         }
@@ -54,11 +54,11 @@ namespace api_opendata.Controllers
             var res = await _service.SaveDashboardAsync(moddel);
             if (res == true)
             {
-                return Ok(new { message = "Màn hình chức năng: Dữ liệu đã được lưu" });
+                return Ok(new { message = "Saved dashboards successfully" });
             }
             else
             {
-                return BadRequest(new { message = "Màn hình chức năng: Lỗi lưu dữ liệu", error = true });
+                return BadRequest(new { message = "Save dashboards failed", error = true });
             }
         }
 
@@ -69,11 +69,11 @@ namespace api_opendata.Controllers
             var res = await _service.DeleteDashboardAsync(Id);
             if (res == true)
             {
-                return Ok(new { message = "Màn hình chức năng: Dữ liệu đã được xóa" });
+                return Ok(new { message = "Dashboard successfully deleted" });
             }
             else
             {
-                return BadRequest(new { message = "Màn hình chức năng: Lỗi xóa dữ liệu", error = true });
+                return BadRequest(new { message = "Removing Dashboard failed", error = true });
             }
         }
     }

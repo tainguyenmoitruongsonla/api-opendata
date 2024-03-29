@@ -20,9 +20,9 @@ namespace api_opendata.Controllers
 
         [HttpGet]
         [Route("list")]
-        public async Task<List<UserDto>> GetAllUsers()
+        public async Task<List<UserDto>> GetAllUsers([FromQuery] FormFilterUser filter)
         {
-            return await _service.GetAllUsersAsync();
+            return await _service.GetAllUsersAsync(filter);
         }
 
         [HttpGet]
@@ -46,11 +46,11 @@ namespace api_opendata.Controllers
             var res = await _service.SaveUserAsync(dto);
             if (res == true)
             {
-                return Ok(new { message = "Tài khoản: Dữ liệu đã được lưu" });
+                return Ok(new { message = "Saved user successfully" });
             }
             else
             {
-                return BadRequest(new { message = "Tài khoản: Lỗi lưu dữ liệu", error = true });
+                return BadRequest(new { message = "Save user failed", error = true });
             }
         }
 
@@ -61,11 +61,11 @@ namespace api_opendata.Controllers
             var res = await _service.DeleteUserAsync(dto);
             if (res == true)
             {
-                return Ok(new { message = "Tài khoản: Dữ liệu đã được xóa" });
+                return Ok(new { message = "User successfully deleted" });
             }
             else
             {
-                return BadRequest(new { message = "Tài khoản: Lỗi xóa dữ liệu", error = true });
+                return BadRequest(new { message = "Removing user failed", error = true });
             }
         }
     }
