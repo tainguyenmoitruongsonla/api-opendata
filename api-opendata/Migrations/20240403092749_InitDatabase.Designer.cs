@@ -12,8 +12,8 @@ using api_opendata.Data;
 namespace api_opendata.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240205082257_InitDb")]
-    partial class InitDb
+    [Migration("20240403092749_InitDatabase")]
+    partial class InitDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -376,6 +376,9 @@ namespace api_opendata.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateOnly>("IssuedDate")
+                        .HasColumnType("date");
 
                     b.Property<int>("RepositoryId")
                         .HasColumnType("int");

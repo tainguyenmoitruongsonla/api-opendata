@@ -374,6 +374,9 @@ namespace api_opendata.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<DateOnly>("IssuedDate")
+                        .HasColumnType("date");
+
                     b.Property<int>("RepositoryId")
                         .HasColumnType("int");
 

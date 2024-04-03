@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace api_opendata.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDb : Migration
+    public partial class InitDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -179,6 +179,7 @@ namespace api_opendata.Migrations
                     DocumentName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DocumentFormat = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DocumentSize = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IssuedDate = table.Column<DateOnly>(type: "date", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedUser = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UpdatedTime = table.Column<DateTime>(type: "datetime2", nullable: true),

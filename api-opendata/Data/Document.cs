@@ -11,6 +11,7 @@ namespace api_opendata.Data
         public string DocumentName { get; set; }
         public string DocumentFormat { get; set; }
         public string DocumentSize { get; set; }
+        public DateOnly IssuedDate { get; set; }
         public DateTime? CreatedTime { get; set; }
         public string CreatedUser { get; set; }
         public DateTime? UpdatedTime { get; set; }

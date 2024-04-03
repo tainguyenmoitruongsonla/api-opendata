@@ -18,6 +18,7 @@ namespace api_opendata.Data
                 await SeedRolesAsync(roleManager);
                 await SeedUsersAsync(userManager);
                 await SeedFunctionsAsync(context);
+                await SeedDepartmentAsync(context);
             }
         }
 
@@ -26,6 +27,12 @@ namespace api_opendata.Data
             if (!await roleManager.Roles.AnyAsync())
             {
                 await roleManager.CreateAsync(new AspNetRoles { Name = "Administrator", IsDeleted = false });
+                await roleManager.CreateAsync(new AspNetRoles { Name = "Thanh tra", IsDeleted = false });
+                await roleManager.CreateAsync(new AspNetRoles { Name = "Phòng Quản lý đất đai", IsDeleted = false });
+                await roleManager.CreateAsync(new AspNetRoles { Name = "Phòng CNTT", IsDeleted = false });
+                await roleManager.CreateAsync(new AspNetRoles { Name = "Phòng TNN, KS, KTTV", IsDeleted = false });
+                await roleManager.CreateAsync(new AspNetRoles { Name = "Phòng Giá đất", IsDeleted = false });
+                await roleManager.CreateAsync(new AspNetRoles { Name = "Phòng Đất đai", IsDeleted = false });
                 await roleManager.CreateAsync(new AspNetRoles { Name = "Default", IsDefault = true, IsDeleted = false });
             }
         }
@@ -49,6 +56,25 @@ namespace api_opendata.Data
                     new Functions { PermitName = "Create", PermitCode = "CREATE" },
                     new Functions { PermitName = "Edit", PermitCode = "EDIT" },
                     new Functions { PermitName = "Delete", PermitCode = "DELETE" });
+
+                await context.SaveChangesAsync();
+            }
+        }
+        private static async Task SeedDepartmentAsync(DatabaseContext context)
+        {
+            if (!await context.Department!.AnyAsync())
+            {
+                context.Department!.AddRange(
+                    new Department { DepartmentName = "Phòng Đất đai và ĐĐBĐ", IsDeleted = false },
+                    new Department { DepartmentName = "Phòng Giá đất và GPMB", IsDeleted = false },
+                    new Department { DepartmentName = "Phòng QL môi trường", IsDeleted = false },
+                    new Department { DepartmentName = "Phòng TNN, KS, KTTV", IsDeleted = false },
+                    new Department { DepartmentName = "VP Đăng ký Đất đai", IsDeleted = false },
+                    new Department { DepartmentName = "Trung tâm phát triển quỹ đất", IsDeleted = false },
+                    new Department { DepartmentName = "Trung tâm CNTT TNMT", IsDeleted = false },
+                    new Department { DepartmentName = "Trung tâm Quan trắc TNMT", IsDeleted = false },
+                    new Department { DepartmentName = "Thanh tra", IsDeleted = false }
+                    );
 
                 await context.SaveChangesAsync();
             }
