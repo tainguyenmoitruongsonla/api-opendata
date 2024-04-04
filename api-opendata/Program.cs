@@ -103,7 +103,7 @@ services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins("http://localhost:3000", "https://opendata-sonla.vercel.app/")
+        builder.WithOrigins("http://localhost:3000", "https://opendata-sonla.vercel.app")
                .AllowAnyMethod()
                .AllowAnyHeader();
     });
