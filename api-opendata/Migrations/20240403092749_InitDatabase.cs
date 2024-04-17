@@ -56,7 +56,6 @@ namespace api_opendata.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RepositoryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RepositoryType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RepositoryCapacity = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedUser = table.Column<string>(type: "nvarchar(max)", nullable: true),

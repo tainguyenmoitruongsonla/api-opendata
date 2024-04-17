@@ -9,8 +9,10 @@ namespace api_opendata.Data
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string DocumentName { get; set; }
+        public string DocumentCode { get; set; }
         public string DocumentFormat { get; set; }
         public string DocumentSize { get; set; }
+        public string DocumentFile { get; set; }
         public DateOnly IssuedDate { get; set; }
         public DateTime? CreatedTime { get; set; }
         public string CreatedUser { get; set; }
